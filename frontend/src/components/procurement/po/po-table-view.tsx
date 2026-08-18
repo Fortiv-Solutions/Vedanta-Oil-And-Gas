@@ -1,6 +1,6 @@
 'use client';
 
-import { ShoppingBag, Building2, Edit3, Printer, Eye, Check, PackageCheck, XCircle, Ban } from 'lucide-react';
+import { ShoppingBag, Building2, Edit3, Printer, Eye, Check, PackageCheck, XCircle, Ban, Calendar, FileText, FileSpreadsheet } from 'lucide-react';
 import type { PurchaseOrderRow } from '@/lib/procurement';
 import {
   normalizePoStatus,
