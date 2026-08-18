@@ -5,8 +5,8 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from .routers import ai, ocr, qc, users, procurement, budget
 
 app = FastAPI(
-    title="Pramukh ERP API",
-    description="Python FastAPI backend serving Pramukh ERP modules",
+    title="Vedanta Oil & Gas ERP API",
+    description="Python FastAPI backend serving Vedanta Oil & Gas (Cairn) ERP modules",
     version="1.0.0"
 )
 
@@ -55,4 +55,4 @@ def check_license():
 
 @app.get("/")
 def read_root():
-    return {"status": "healthy", "service": "Pramukh ERP Python Backend"}
+    return {"status": "healthy", "service": "Vedanta Oil & Gas ERP Python Backend"}

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 120" width="780" height="120">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800;900&amp;display=swap');
+      .vedanta-blue { fill: #005DAA; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 900; }
+      .oilgas-green { fill: #70C04B; font-family: 'Plus Jakarta Sans', Arial, sans-serif; font-weight: 800; }
+    </style>
+  </defs>
+
+  <!-- 1. Globe Symbol (Left) -->
+  <g transform="translate(10, 10)">
+    <!-- Globe outline circle -->
+    <!-- Top & Bottom Green Waves -->
+    <path d="M 12,42 C 28,12 72,12 88,42 C 78,54 22,54 12,42 Z" fill="#70C04B" />
+    <path d="M 8,40 C 2,52 2,68 8,80 C 25,62 75,62 92,80 C 98,68 98,52 92,40 C 70,55 30,55 8,40 Z" fill="#005DAA" />
+    <path d="M 12,78 C 22,66 78,66 88,78 C 72,108 28,108 12,78 Z" fill="#70C04B" />
+    
+    <!-- Fine Wave Lines Detail -->
+    <path d="M 14,35 Q 50,15 86,35 Q 50,22 14,35 Z" fill="#70C04B" />
+    <path d="M 8,50 Q 50,30 92,50 Q 50,42 8,50 Z" fill="#005DAA" />
+    <path d="M 8,70 Q 50,90 92,70 Q 50,78 8,70 Z" fill="#005DAA" />
+    <path d="M 14,85 Q 50,105 86,85 Q 50,98 14,85 Z" fill="#70C04B" />
+  </g>
+
+  <!-- 2. "vedanta" Text (Blue) -->
+  <text x="122" y="78" class="vedanta-blue" font-size="68" letter-spacing="-2">vedanta</text>
+
+  <!-- 3. "oil & gas" Text (Green) -->
+  <text x="390" y="78" class="oilgas-green" font-size="68" letter-spacing="-1">oil &amp; gas</text>
+
+  <!-- 4. Vertical Separator Line (Green) -->
+  <line x1="628" y1="12" x2="628" y2="108" stroke="#70C04B" stroke-width="2.5" />
+
+  <!-- 5. CAIRN Badge (Right) -->
+  <g transform="translate(648, 22)">
+    <!-- Outer thin ring -->
+    <ellipse cx="56" cy="38" rx="54" ry="32" fill="none" stroke="#004268" stroke-width="1.8" />
+    <!-- Inner filled oval -->
+    <ellipse cx="56" cy="38" rx="50" ry="28" fill="#004268" />
+    <!-- Inner white accent ring -->
+    <ellipse cx="56" cy="38" rx="47" ry="25" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.6" />
+    <!-- CAIRN Text -->
+    <text x="56" y="47" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-weight="900" font-size="22" fill="#FFFFFF" text-anchor="middle" letter-spacing="1.5">CAIRN</text>
+  </g>
+</svg>

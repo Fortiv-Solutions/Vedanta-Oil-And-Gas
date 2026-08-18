@@ -18,11 +18,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jyoti ERP - Construction Operations Platform",
-  description: "Company-wide construction project, procurement, inventory, billing, budget, and analytics management.",
+  title: "Vedanta Oil & Gas ERP - Energy Operations & Procurement Platform",
+  description: "Enterprise energy operations, oilfield procurement, inventory, billing, budget, and analytics management for Vedanta Oil & Gas (Cairn).",
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: "/apple-icon.png",
   }
 };
 

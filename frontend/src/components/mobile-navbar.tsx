@@ -55,7 +55,7 @@ export default function MobileNavbar() {
       {/* Top Mobile Header */}
       <header className="lg:hidden sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-card/95 px-4 shadow-xs backdrop-blur-md">
         <Link href="/procurement" className="flex items-center gap-2">
-          <Image src="/jyoti-logo.png" alt="Jyoti" width={72} height={34} className="w-12 h-auto" priority />
+          <Image src="/vedanta-logo.png" alt="Vedanta Oil & Gas | Cairn" width={280} height={50} className="h-9 w-auto object-contain max-w-[260px]" priority />
         </Link>
 
         <div className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function MobileNavbar() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between border-b border-border p-4">
                 <div className="flex items-center gap-2">
-                  <Image src="/jyoti-logo.png" alt="Jyoti" width={72} height={34} className="w-12 h-auto" />
+                  <Image src="/vedanta-logo.png" alt="Vedanta Oil & Gas | Cairn" width={260} height={45} className="h-8 w-auto object-contain max-w-[240px]" />
                 </div>
                 <button
                   type="button"

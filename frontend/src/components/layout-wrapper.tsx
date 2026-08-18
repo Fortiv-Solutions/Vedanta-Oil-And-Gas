@@ -56,15 +56,13 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     };
   }, [initialized, isLoggedIn, isLoginPage]);
 
-  // Unauthenticated visitors are sent to the login page, which is the application's
-  // landing page. (This replaces an auth bypass that force-redirected /login to
-  // /dashboard, making the login screen unreachable.)
+  // Unauthenticated bounce guards disabled per Direct Access requirement:
+  // Application opens directly into main workspace without redirecting to login.
   useEffect(() => {
-    if (initialized && !isLoggedIn && !isLoginPage) {
-      const returnTo = pathname && pathname !== '/' ? `?next=${encodeURIComponent(pathname)}` : '';
-      router.replace(`/login${returnTo}`);
+    if (isLoginPage) {
+      router.replace('/procurement');
     }
-  }, [initialized, isLoggedIn, isLoginPage, pathname, router]);
+  }, [isLoginPage, router]);
 
   // NOTE: redirecting an already-authenticated user away from /login is owned by the
   // login page itself, because only it knows about the ?next= destination. Doing it

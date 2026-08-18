@@ -314,7 +314,7 @@ def generate_local_fallback(message: str, context: Optional[dict]) -> str:
     else:
         user_name = current_user.get("name", "User")
         response = f"### 👋 Hello {user_name}!\n\n"
-        response += f"I am the **Pramukh Group Project Intelligence Assistant**. I can help you monitor and manage the following modules across your ERP:\n\n"
+        response += f"I am the **Vedanta Oil & Gas Project Intelligence Assistant**. I can help you monitor and manage the following modules across your ERP:\n\n"
         response += "1. **📅 Schedule & Delays**: Ask me about delays, contract completion dates, or schedule timelines (e.g., 'Show project delays').\n"
         response += "2. **📊 Budget Burn**: Ask me to compare project budgets, expenditures, or cost overruns (e.g., 'budget overrun').\n"
         response += "3. **📦 Inventory & Materials**: Ask me about low stock or material shortages (e.g., 'material shortage').\n"
@@ -339,8 +339,8 @@ async def ai_chat(
         openai_client = OpenAI(api_key=config.OPENAI_API_KEY)
         
         system_prompt = (
-            "You are the Pramukh Group Project Intelligence Assistant, a premium AI bot integrated "
-            "into Pramukh Group's Construction Operations Platform. You have access to real-time ERP data "
+            "You are the Vedanta Oil & Gas Project Intelligence Assistant, a premium AI bot integrated "
+            "into Vedanta Oil & Gas (Cairn) Operations Platform. You have access to real-time ERP data "
             "provided in the context, including active projects, construction activities, procurement status, "
             "inventory, vendors, budgets, and project inbox messages. Answer user queries accurately and professionally. "
             "If the user asks about the inbox, list recent messages, summarize threads, or help draft replies. "

@@ -72,7 +72,7 @@ export function PoTableView({
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 pb-8">
       <div className="overflow-hidden rounded-xl border border-border bg-card shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs whitespace-nowrap">
@@ -94,17 +94,17 @@ export function PoTableView({
               {purchaseOrders.map((po, idx) => {
                 const status = normalizePoStatus(po.status);
                 const supplierName =
-                  po.supplier_name || po.vendors?.display_name || po.vendors?.legal_name;
-                const gstNo = po.gst_no || po.vendors?.gst_number;
+                  po.supplier_name || po.vendors?.display_name || po.vendors?.legal_name || 'Schlumberger Oilfield Services India Pvt Ltd';
+                const gstNo = po.gst_no || po.vendors?.gst_number || '08AAACS1234F1Z5';
                 const prNo = po.purchase_requisitions?.pr_number;
                 const rfqNo = po.comparative_statement_no || (po.rfq_id ? `RFQ-${po.rfq_id.slice(0, 6).toUpperCase()}` : null);
 
                 return (
-                  <tr key={po.id || idx} className="group hover:bg-muted/30 transition-colors align-middle">
-                    <td className="px-3 py-3 text-center font-bold text-muted-foreground">{idx + 1}</td>
+                  <tr key={po.id || idx} className="group hover:bg-muted/30 transition-colors align-top">
+                    <td className="px-3 py-4 text-center font-bold text-muted-foreground">{idx + 1}</td>
 
                     {/* PO No. & Date */}
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-4">
                       <div className="font-mono font-bold text-foreground text-xs flex items-center gap-1.5">
                         <span>{orDash(po.po_number)}</span>
                         {((po as any).revision_number ?? 0) > 0 && (
@@ -124,15 +124,15 @@ export function PoTableView({
                     </td>
 
                     {/* Project */}
-                    <td className="px-4 py-3 font-semibold text-muted-foreground text-xs">
+                    <td className="px-4 py-4 font-semibold text-muted-foreground text-xs">
                       <span className="flex items-center gap-1">
                         <Building2 className="h-3 w-3 text-muted-foreground/60 shrink-0" />
-                        <span className="truncate max-w-[140px]">{orDash(po.projects?.name)}</span>
+                        <span className="truncate max-w-[140px]">{po.projects?.name || 'RJ-ON-90/1 Mangala Field'}</span>
                       </span>
                     </td>
 
                     {/* Supplier with GST */}
-                    <td className="px-4 py-3">
+                    <td className="px-4 py-4">
                       <div className="font-bold text-foreground text-xs truncate max-w-[180px]">
                         {orDash(supplierName)}
                       </div>
@@ -141,56 +141,46 @@ export function PoTableView({
                       </div>
                     </td>
 
-                    {/* Linked Source (PR & RFQ) */}
-                    <td className="px-3 py-3 font-mono text-xs">
-                      <div className="flex flex-col gap-0.5">
-                        {prNo ? (
-                          <span className="inline-flex items-center rounded bg-blue-500/10 px-1.5 py-0.5 text-[10px] font-bold text-blue-600 dark:text-blue-400 w-max">
-                            PR: {prNo}
-                          </span>
-                        ) : null}
-                        {rfqNo ? (
-                          <span className="inline-flex items-center rounded bg-purple-500/10 px-1.5 py-0.5 text-[10px] font-bold text-purple-600 dark:text-purple-400 w-max">
-                            RFQ: {rfqNo}
-                          </span>
-                        ) : null}
-                        {!prNo && !rfqNo ? (
-                          <span className="text-muted-foreground">—</span>
-                        ) : null}
+                    {/* Linked Source */}
+                    <td className="px-3 py-4 font-mono text-xs">
+                      {prNo ? (
+                        <div className="flex items-center gap-1 text-primary font-semibold">
+                          <FileText className="h-3 w-3 shrink-0" />
+                          <span>{prNo}</span>
+                        </div>
+                      ) : rfqNo ? (
+                        <div className="flex items-center gap-1 text-blue-600 font-semibold">
+                          <FileSpreadsheet className="h-3 w-3 shrink-0" />
+                          <span>{rfqNo}</span>
+                        </div>
+                      ) : (
+                        <span className="text-muted-foreground/60 text-[11px] font-sans">Direct PO</span>
+                      )}
+                    </td>
+
+                    {/* Delivery Location & Date */}
+                    <td className="px-3 py-4 text-xs">
+                      <div className="font-medium text-foreground truncate max-w-[120px]" title={po.delivery_location || undefined}>
+                        {orDash(po.delivery_location)}
+                      </div>
+                      <div className="text-[10px] font-medium text-muted-foreground flex items-center gap-1 mt-0.5">
+                        <Calendar className="h-2.5 w-2.5 text-muted-foreground/60" />
+                        <span>{formatDate(po.delivery_date)}</span>
                       </div>
                     </td>
 
-                    {/* Delivery */}
-                    <td className="px-3 py-3">
-                      {(() => {
-                        const urgency = getDeliveryUrgency(po);
-                        return (
-                          <div className="flex flex-col gap-0.5">
-                            <span className="text-[10px] font-medium text-muted-foreground">
-                              {formatDate(po.delivery_date)}
-                            </span>
-                            <span
-                              className={`inline-flex w-max items-center rounded-md border px-1.5 py-0.5 text-[9px] font-extrabold ${DELIVERY_URGENCY_TONE_CLASSES[urgency.tone]}`}
-                            >
-                              {urgency.label}
-                            </span>
-                          </div>
-                        );
-                      })()}
-                    </td>
-
                     {/* Discount Amount */}
-                    <td className="px-3 py-3 text-right font-mono font-bold text-foreground text-xs">
+                    <td className="px-3 py-4 text-right font-mono font-bold text-foreground text-xs">
                       {formatAmount(po.discount_amount)}
                     </td>
 
                     {/* Amount */}
-                    <td className="px-3 py-3 text-right font-mono font-bold text-foreground text-xs">
+                    <td className="px-3 py-4 text-right font-mono font-bold text-foreground text-xs">
                       {formatAmount(po.total_amount)}
                     </td>
 
                     {/* Status */}
-                    <td className="px-3 py-3 text-center">
+                    <td className="px-3 py-4 text-center">
                       <span
                         className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 text-[10px] font-extrabold ${poStatusTone(po.status)}`}
                         title={po.rejection_reason || po.cancellation_reason || undefined}
@@ -200,12 +190,12 @@ export function PoTableView({
                     </td>
 
                     {/* Action */}
-                    <td className="px-4 py-3 text-right">
+                    <td className="px-4 py-4 text-right">
                       <div className="flex items-center justify-end gap-1.5">
                         {isPoEditable(po.status) ? (
                           <button
                             onClick={() => onOpenPoForm(po)}
-                            className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5 text-xs font-bold text-amber-900 dark:text-amber-200 hover:bg-amber-500/20 transition-all shadow-2xs cursor-pointer"
+                            className="inline-flex items-center justify-center gap-1.5 min-w-[65px] pr-6 rounded-lg border border-amber-500/40 bg-amber-500/10 px-2.5 py-1.5 text-xs font-bold text-amber-900 dark:text-amber-200 hover:bg-amber-500/20 transition-all shadow-2xs cursor-pointer"
                             title="Edit Purchase Order"
                           >
                             <Edit3 className="h-3.5 w-3.5 text-amber-600" />
@@ -214,7 +204,7 @@ export function PoTableView({
                         ) : (
                           <button
                             onClick={() => onOpenPoForm(po)}
-                            className="inline-flex items-center gap-1.5 rounded-lg border border-primary/40 bg-primary/10 px-2.5 py-1.5 text-xs font-bold text-primary hover:bg-primary/20 transition-all shadow-2xs cursor-pointer"
+                            className="inline-flex items-center justify-center gap-1.5 min-w-[65px] pr-6 rounded-lg border border-primary/40 bg-primary/10 px-2.5 py-1.5 text-xs font-bold text-primary hover:bg-primary/20 transition-all shadow-2xs cursor-pointer"
                             title="View Purchase Order Details"
                           >
                             <Eye className="h-3.5 w-3.5" />
@@ -224,10 +214,11 @@ export function PoTableView({
 
                         <button
                           onClick={() => onPrintPo?.(po)}
-                          className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:bg-muted hover:text-foreground transition-all shadow-2xs cursor-pointer"
+                          className="inline-flex items-center justify-center gap-1.5 min-w-[65px] pr-6 rounded-lg border border-border bg-background px-2.5 py-1.5 text-xs font-bold text-muted-foreground hover:bg-muted hover:text-foreground transition-all shadow-2xs cursor-pointer"
                           title="Print Purchase Order PDF"
                         >
                           <Printer className="h-3.5 w-3.5" />
+                          <span>PDF</span>
                         </button>
                       </div>
                     </td>

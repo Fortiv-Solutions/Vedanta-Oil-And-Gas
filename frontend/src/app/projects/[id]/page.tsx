@@ -1130,7 +1130,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
           </div>
           <div class="header">
             <div>
-              <div class="title">JYOTI ERP</div>
+              <div class="title">VEDANTA ERP</div>
               <div style="font-size: 14px; font-weight: 600; color: #e83e8c; margin-top: 4px;">Quality Control & Audit Log Report</div>
             </div>
             <div style="text-align: right;">
@@ -3845,7 +3845,7 @@ Rules:
         {/* Top Logo Container (h-14 matching HeaderNavbar) */}
         <div className="flex items-center justify-center h-14 flex-shrink-0 border-b border-border bg-card">
           <Link href="/projects" title="Back to Projects" className="flex items-center justify-center w-full h-full hover:bg-muted/30 transition-colors group">
-            <Image src="/jyoti-logo.png" alt="Jyoti" width={72} height={34} className="w-14 h-auto drop-shadow-md flex-shrink-0" />
+            <Image src="/vedanta-logo.png" alt="Vedanta Oil & Gas" width={160} height={40} className="w-14 h-auto object-contain flex-shrink-0" />
           </Link>
         </div>
 
@@ -3914,7 +3914,7 @@ Rules:
             {/* Brand Logo & Page Title Breadcrumb */}
             <div className="flex items-center gap-2 select-none">
               <span className="text-[14px] font-heading font-black tracking-wider text-primary leading-none uppercase">
-                JYOTI
+                VEDANTA
               </span>
               <span className="text-muted-foreground/30 text-xs">/</span>
               <span className="text-[11px] font-extrabold text-muted-foreground uppercase tracking-widest leading-none">
@@ -6272,7 +6272,7 @@ Rules:
 
                       {/* Report Footer */}
                       <div className="border-t border-border/60 pt-6 flex justify-between items-center flex-wrap gap-4 text-[10px] text-muted-foreground font-bold uppercase tracking-wider">
-                        <span>Reported by: Pramukh Construction Intelligence Engine</span>
+                        <span>Reported by: Vedanta Oilfield Intelligence Engine</span>
                         <span>Last updated: {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
                       </div>
                     </div>

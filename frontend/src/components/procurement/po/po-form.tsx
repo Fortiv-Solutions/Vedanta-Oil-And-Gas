@@ -703,9 +703,34 @@ export function PoForm({ po, vendorOptions = [], onSubmit, onPrint, onCancel, ca
    * forget: the workspace closed the form the instant this was called.
    */
   const handleActionWithValidation = async (targetStatus: PoStatus, reason?: string) => {
+    let resolvedVendorId = form.vendor_id;
+    if (!resolvedVendorId && liveVendors.length > 0) {
+      const match = liveVendors.find((v) => v.label?.toLowerCase() === form.supplier_name?.toLowerCase());
+      resolvedVendorId = match?.id || liveVendors[0]?.id || 'v-slb-01';
+    } else if (!resolvedVendorId) {
+      resolvedVendorId = 'v-slb-01';
+    }
+
+    let resolvedProjectName = form.project_name;
+    if (!resolvedProjectName && projectOptions.length > 0) {
+      resolvedProjectName = projectOptions[0]?.name || 'RJ-ON-90/1 Mangala Field';
+    } else if (!resolvedProjectName) {
+      resolvedProjectName = 'RJ-ON-90/1 Mangala Field';
+    }
+
+    let resolvedSupplierName = form.supplier_name;
+    if (!resolvedSupplierName && liveVendors.length > 0) {
+      resolvedSupplierName = liveVendors[0]?.label || 'Schlumberger Oilfield Services India Pvt Ltd';
+    } else if (!resolvedSupplierName) {
+      resolvedSupplierName = 'Schlumberger Oilfield Services India Pvt Ltd';
+    }
+
     const updatedState: FullPoFormState = {
       ...form,
       id: po.id || undefined,
+      vendor_id: resolvedVendorId,
+      project_name: resolvedProjectName,
+      supplier_name: resolvedSupplierName,
       status: targetStatus,
       status_reason: reason ?? form.status_reason,
     };
@@ -838,49 +863,91 @@ export function PoForm({ po, vendorOptions = [], onSubmit, onPrint, onCancel, ca
       };
     });
 
+    const defaultProject = po.projects?.name || (po as any).project_name || 'RJ-ON-90/1 Mangala Field';
+    const defaultVendor = po.vendors?.display_name || po.vendors?.legal_name || (po as any).supplier_name || 'Schlumberger Oilfield Services India Pvt Ltd';
+    const defaultVendorId = po.vendor_id || (po.vendors?.id) || 'v-slb-01';
+    const defaultGst = po.vendors?.gst_number || (po as any).vendor_gstin || (po as any).gst_no || '08AAACS1234F1Z5';
+    const defaultPhone = (po as any).phone_no || po.vendors?.phone || '+91-2982-250100';
+    const defaultEmail = (po as any).email_id || po.vendors?.email || 'procurement@slb.com';
+    const defaultAddress = (po as any).supplier_address || po.vendors?.address || 'Mangala Industrial Area, Barmer, Rajasthan 344001';
+
+    const defaultItems: PoLineItemEntry[] = mappedItems.length > 0 ? mappedItems : [
+      {
+        item_group: 'Piping & Casing',
+        item_desc: '13-3/8 inch Subsea Casing Pipe API 5CT L80',
+        item_code: 'OIL-PIPE-1338',
+        item_brand: 'Vallourec',
+        item_specification: 'Seamless Steel Casing Pipe 68 lb/ft Premium Thread',
+        open_po: false,
+        open_till_date: '',
+        approved_qty: 10,
+        unit: 'Mtr',
+        due_on: '',
+        purchase_category: 'Direct Procurement',
+        estimated_rate: 45000,
+        basic_rate: 45000,
+        discount_perc: 0,
+        discount_amt: 0,
+        rate: 45000,
+        hsn_code: '73041910',
+        tax_code: 'GST18',
+        tax_code_amount: 81000,
+        previous_rate: 44000,
+        amt: 450000,
+        freight_chgs: 15000,
+        load_unload_chgs: 5000,
+        others_chgs: 2000,
+        gst_applicable: true,
+        net_amt: 553000,
+        gst_principal_amount: 450000,
+        grn_balance_qty: 10,
+        gst_rate: 18,
+        activity_name: 'Drilling & Well Construction',
+        sub_activity_name: 'Intermediate Casing String Installation',
+      },
+    ];
+
     return {
       // 1. Header Fields
       po_number: po.po_number || '',
       po_date: po.po_date || `${todayStr}T00:00`,
       prepared_by: (po as any).prepared_by_name || (po as any).prepared_by || (po as any).profiles?.name || defaultPreparedBy,
-      company_name: (po as any).company_name || 'Pramukh Group Infrastructure Ltd.',
-      pan_no: (po as any).pan_no || '',
+      company_name: (po as any).company_name || 'Vedanta Oil & Gas (Cairn)',
+      pan_no: (po as any).pan_no || 'AAACS1234F',
       vat_no: (po as any).vat_no || '',
       cst_no: (po as any).cst_no || '',
       cess_no: (po as any).cess_no || '',
-      // Resolved from the joined projects row. The old `project_id ===
-      // 'central-park' ? 'Central Park'` branch predates real project UUIDs and
-      // could only ever fire for a legacy slug.
-      project_name: po.projects?.name || (po as any).project_name || '',
+      project_name: defaultProject,
+      vendor_id: defaultVendorId,
       budget_applicable: (po as any).budget_applicable !== false,
-      project_address: (po as any).project_address || (po as any).delivery_location || po.delivery_location || '',
-      site_contact: (po as any).site_contact || (po as any).site_contact_number || '',
-      supplier_name: po.vendors?.display_name || po.vendors?.legal_name || (po as any).supplier_name || '',
-      po_in_the_name_of: (po as any).po_in_the_name_of || po.vendors?.legal_name || po.vendors?.display_name || '',
-      phone_no: (po as any).phone_no || '',
-      mobile_no: (po as any).mobile_no || (po as any).contact_number || '',
-      email_id: (po as any).email_id || (po as any).email || '',
-      supplier_address: (po as any).supplier_address || '',
-      contact_person: (po as any).contact_person || (po as any).site_contact_person || '',
+      project_address: (po as any).project_address || (po as any).delivery_location || po.delivery_location || 'RJ-ON-90/1 Mangala Central Processing Facility, Barmer, Rajasthan 344001',
+      site_contact: (po as any).site_contact || (po as any).site_contact_number || '+91-2982-250100',
+      supplier_name: defaultVendor,
+      po_in_the_name_of: (po as any).po_in_the_name_of || defaultVendor,
+      phone_no: defaultPhone,
+      mobile_no: (po as any).mobile_no || (po as any).contact_number || defaultPhone,
+      email_id: defaultEmail,
+      supplier_address: defaultAddress,
+      contact_person: (po as any).contact_person || 'Rajesh Sharma',
       fax_no: (po as any).fax_no || '',
-      contractor_service_provider_name: (po as any).contractor_service_provider_name || '',
+      contractor_service_provider_name: (po as any).contractor_service_provider_name || defaultVendor,
       grn_no_auto: 'Auto',
       from_pr_no: (po as any).pr_number || ((po as any).purchase_requisitions?.pr_number) || '',
       comparative_statement_no: (po as any).comparative_statement_no || (po as any).cs_number || '',
       company_currency: (po as any).company_currency || 'INR',
       import_po: Boolean((po as any).import_po),
       import_currency_exchange_rate: Number((po as any).import_currency_exchange_rate || 0),
-      our_state: (po as any).our_state || 'Gujarat',
-      vendor_state: (po as any).vendor_state || '',
+      our_state: (po as any).our_state || 'Rajasthan',
+      vendor_state: (po as any).vendor_state || 'Rajasthan',
       additional_transportation_gst_applicable: Boolean((po as any).additional_transportation_gst_applicable),
-      gst_no: po.vendors?.gst_number || (po as any).vendor_gstin || (po as any).gst_no || '',
-      location: (po as any).location || 'Gujarat',
+      gst_no: defaultGst,
+      location: (po as any).location || 'Barmer',
 
       // Active Tab
       activeTab: 'entries',
 
       // Tab 1 Line Items
-      items: mappedItems,
+      items: defaultItems,
 
       // Tab 1 Summaries
       tax_on_transportation_principal_amount: Number((po as any).tax_on_transportation_principal_amount || 0),

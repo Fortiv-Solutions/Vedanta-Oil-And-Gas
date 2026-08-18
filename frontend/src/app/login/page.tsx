@@ -176,10 +176,7 @@ function LoginShell() {
 function BrandMark() {
   return (
     <div className="absolute left-5 top-5 z-20 flex select-none items-center gap-3 sm:left-8 sm:top-7">
-      <Image src="/jyoti-logo.png" alt="Jyoti" width={72} height={34} className="h-9 w-auto" priority />
-      <span className="font-heading text-lg font-black tracking-[0.2em] uppercase bg-gradient-to-r from-[#c3006a] via-[#e83e8c] to-[#a3105c] bg-clip-text text-transparent drop-shadow-xs">
-        JYOTI
-      </span>
+      <Image src="/vedanta-logo.png" alt="Vedanta Oil & Gas" width={160} height={40} className="h-9 w-auto object-contain" priority />
     </div>
   );
 }
@@ -279,20 +276,8 @@ function LoginView() {
           {/* Icon tile */}
           <div className="flex justify-center">
             <span className="flex h-12 w-12 items-center justify-center rounded-[15px] border border-white/80 bg-white text-slate-800 shadow-[0_6px_18px_-6px_rgba(31,58,95,0.35)] dark:border-white/10 dark:bg-slate-800 dark:text-slate-100">
-              <LogIn className="h-5 w-5" aria-hidden="true" />
-            </span>
-          </div>
-
-          {/* Heading */}
-          <div className="mt-5 text-center">
-            <h1
-              id="login-heading"
-              className="font-heading text-[22px] font-bold leading-tight tracking-tight text-slate-900 dark:text-white"
-            >
-              Sign in with email
-            </h1>
-            <p className="mx-auto mt-2 max-w-[300px] text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
-              Access your Jyoti workspace — projects, procurement, budget and
+             <p className="mx-auto mt-2 max-w-[300px] text-[13px] leading-relaxed text-slate-500 dark:text-slate-400">
+              Access your Vedanta Oil & Gas (Cairn) workspace — projects, procurement, budget and
               billing, together in one place.
             </p>
           </div>
@@ -311,25 +296,19 @@ function LoginView() {
                 />
                 <input
                   id="login-email"
-                  name="email"
                   type="email"
-                  inputMode="email"
-                  autoComplete="email"
-                  autoCapitalize="none"
-                  spellCheck={false}
+                  required
+                  placeholder="Enter your corporate email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                  disabled={isLoading}
-                  aria-invalid={Boolean(error)}
-                  className="h-12 w-full rounded-xl border border-transparent bg-slate-100/80 pl-10 pr-4 text-sm font-medium text-slate-900 shadow-inner shadow-white/40 outline-none transition-colors placeholder:text-slate-400 focus:border-slate-300 focus:bg-white/95 focus:ring-2 focus:ring-slate-900/10 disabled:opacity-60 dark:bg-slate-800/70 dark:text-white dark:shadow-none dark:placeholder:text-slate-500 dark:focus:border-slate-600 dark:focus:bg-slate-800 dark:focus:ring-white/10"
+                  className="h-11 w-full rounded-xl border border-slate-200/90 bg-white/80 pl-10 pr-3.5 text-xs text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-slate-600 dark:focus:ring-white/10"
                 />
               </div>
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="login-password" className="sr-only">
+              <label htmlFor="login-password font-medium text-xs text-slate-700">
                 Password
               </label>
               <div className="relative">
@@ -339,22 +318,18 @@ function LoginView() {
                 />
                 <input
                   id="login-password"
-                  name="password"
                   type={showPassword ? 'text' : 'password'}
-                  autoComplete="current-password"
+                  required
+                  placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
-                  disabled={isLoading}
-                  aria-invalid={Boolean(error)}
-                  className="h-12 w-full rounded-xl border border-transparent bg-slate-100/80 pl-10 pr-11 text-sm font-medium text-slate-900 shadow-inner shadow-white/40 outline-none transition-colors placeholder:text-slate-400 focus:border-slate-300 focus:bg-white/95 focus:ring-2 focus:ring-slate-900/10 disabled:opacity-60 dark:bg-slate-800/70 dark:text-white dark:shadow-none dark:placeholder:text-slate-500 dark:focus:border-slate-600 dark:focus:bg-slate-800 dark:focus:ring-white/10"
+                  className="h-11 w-full rounded-xl border border-slate-200/90 bg-white/80 pl-10 pr-10 text-xs text-slate-900 placeholder:text-slate-400 transition-colors focus:border-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:border-slate-800 dark:bg-slate-900/80 dark:text-white dark:placeholder:text-slate-500 dark:focus:border-slate-600 dark:focus:ring-white/10"
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword((v) => !v)}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  aria-pressed={showPassword}
-                  className="absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md text-slate-400 transition-colors hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/20 dark:text-slate-500 dark:hover:text-slate-200"
                 >
                   {showPassword ? (
                     <Eye className="h-4 w-4" aria-hidden="true" />
@@ -368,7 +343,7 @@ function LoginView() {
             {/* Forgot password */}
             <div className="flex justify-end">
               <a
-                href="mailto:admin@pramukh.com?subject=Jyoti%20ERP%20password%20reset"
+                href="mailto:procurement@vedantaoilandgas.com?subject=Vedanta%20ERP%20password%20reset"
                 className="rounded text-xs font-medium text-slate-600 underline-offset-2 transition-colors hover:text-slate-900 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/20 dark:text-slate-400 dark:hover:text-white"
               >
                 Forgot password?
@@ -405,13 +380,11 @@ function LoginView() {
           </form>
 
           {/* Footer note */}
-          {/* "Request an account" always sits on its own line so it never wraps
-              mid-phrase on narrow viewports. */}
           <p className="mt-5 text-center text-[11px] leading-relaxed text-slate-500 dark:text-slate-500">
             Access is provisioned by your administrator.
             <br />
             <a
-              href="mailto:admin@pramukh.com?subject=Jyoti%20ERP%20access%20request"
+              href="mailto:procurement@vedantaoilandgas.com?subject=Vedanta%20ERP%20access%20request"
               className="font-semibold text-slate-700 underline-offset-2 hover:underline dark:text-slate-300"
             >
               Request an account

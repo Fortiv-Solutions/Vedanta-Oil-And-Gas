@@ -177,7 +177,7 @@ const renderMessageContent = (content: string) => {
   return <div className="space-y-1">{elements}</div>;
 };
 
-const WELCOME_MSG = 'Hello! I am your Pragati AI Assistant. Ask me anything about project schedules, delays, budget burn, or inventory stock levels.';
+const WELCOME_MSG = 'Hello! I am your Vedanta Oil & Gas AI Assistant. Ask me anything about oilfield operations, procurement, PR/PO status, budget burn, or inventory stock levels.';
 
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -421,14 +421,14 @@ export default function FloatingChatbot() {
             className="mb-4 flex h-[500px] w-[380px] flex-col rounded-2xl border border-gray-200 bg-white/95 shadow-2xl backdrop-blur-md dark:border-gray-800 dark:bg-gray-900/95 sm:w-[420px]"
           >
             {/* Header */}
-            <div className="flex items-center justify-between rounded-t-2xl bg-gradient-to-r from-[#e83e8c] to-[#f2679f] px-4 py-3 text-white">
+            <div className="flex items-center justify-between rounded-t-2xl bg-gradient-to-r from-[#005DAA] to-[#0072CE] px-4 py-3 text-white">
               <div className="flex items-center gap-2">
                 <div className="grid h-8 w-8 place-items-center rounded-lg bg-white/20">
                   <Sparkles className="h-4.5 w-4.5 animate-pulse" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold tracking-wide">Pragati AI Assistant</h3>
-                  <span className="block text-[10px] text-white/80">ERP Intelligence Engine</span>
+                  <h3 className="text-sm font-bold tracking-wide">Vedanta AI Assistant</h3>
+                  <span className="block text-[10px] text-white/80">Energy ERP Intelligence</span>
                 </div>
               </div>
               <div className="flex items-center gap-1">
@@ -562,7 +562,7 @@ export default function FloatingChatbot() {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask Pragati AI..."
+                  placeholder="Ask Vedanta AI..."
                   className="flex-1 bg-transparent text-xs text-gray-800 placeholder-gray-400 focus:outline-none dark:text-gray-100"
                 />
                 <button

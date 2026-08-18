@@ -64,14 +64,14 @@ export default function HeaderNavbar() {
     <header className="hidden lg:flex items-center justify-between h-14 bg-card border-b border-border transition-all duration-300 w-full flex-shrink-0">
       {/* Left side: Logo, Title & Search */}
       <div className="flex items-center h-full">
-        {/* Logo Icon Container (Matches sidebar width: 80px) */}
-        <Link href="/procurement" className="w-20 shrink-0 h-full flex items-center justify-center border-r border-border hover:bg-muted/30 transition-colors">
+        {/* Official User Uploaded Brand Logo */}
+        <Link href="/procurement" className="h-full shrink-0 flex items-center justify-center border-r border-border hover:bg-muted/30 transition-colors px-4 py-1">
           <Image
-            src="/jyoti-logo.png"
-            alt="Jyoti"
-            width={72}
-            height={34}
-            className="w-14 h-auto drop-shadow-md flex-shrink-0"
+            src="/vedanta-logo.png"
+            alt="Vedanta Oil & Gas | Cairn"
+            width={400}
+            height={65}
+            className="h-11.5 max-h-[46px] w-auto object-contain flex-shrink-0"
             priority
           />
         </Link>
@@ -79,7 +79,7 @@ export default function HeaderNavbar() {
         {/* Brand Text and Page Title */}
         <div className="flex items-center gap-2 px-6 select-none">
           <span className="text-[14px] font-heading font-black tracking-wider text-primary leading-none uppercase">
-            JYOTI
+            VEDANTA
           </span>
           <span className="text-muted-foreground/30 text-xs">/</span>
           <span className="text-[11px] font-extrabold text-muted-foreground uppercase tracking-widest leading-none">

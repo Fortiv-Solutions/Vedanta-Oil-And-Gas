@@ -8,5 +8,5 @@ import { redirect } from 'next/navigation';
  * LayoutWrapper (see getRoleLandingPath in lib/rbac).
  */
 export default function Home() {
-  redirect('/login');
+  redirect('/procurement');
 }

@@ -80,19 +80,48 @@ const DOC_TYPE_MAP: Record<string, string> = {
 function blankForm(projectId: string): PrFormState {
   const today = new Date().toISOString().slice(0, 10);
   const required = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
+  const pId = projectId || 'f6704467-df8c-4f51-a49b-ddfdc40c39af';
   return {
     id: null, pr_number: null, status: 'draft',
-    pr_date: today, company_name: '', project_id: projectId, site_id: null,
+    pr_date: today, company_name: 'Vedanta Oil & Gas (Cairn)', project_id: pId, site_id: 'site-mangala-cpf',
     pr_type: 'material', priority: 'normal', required_date: required, pr_release_date: null,
-    budget_applicable: true, budget_head_id: null, cost_code_id: null, cost_centre: '',
-    activity_name: '', activity_code: '', wbs_code: '', over_budget_justification: '',
-    contractor_applicable: false, contractor_name: '', vendor_code: '', contract_reference: '',
-    scope_of_service: '', contact_person: '', contact_number: '',
-    delivery_address: '', site_contact_person: '', site_contact_number: '', delivery_instructions: '',
-    general_remarks: '', internal_notes: '', terms_and_conditions: '', department: 'Rohan Mehta (Site Eng)',
-    unlocked_project: 1.00, prepared_by: 'Rohan Mehta (Site Eng)',
-    discount_amount: 0, freight_amount: 0, other_charges: 0, contingency_amount: 0,
-    lines: [],
+    budget_applicable: true, budget_head_id: null, cost_code_id: null, cost_centre: 'CC-BARMER-01',
+    activity_name: 'Drilling & Well Construction', activity_code: 'ACT-DRILL-01', wbs_code: 'WBS-WELL-001', over_budget_justification: '',
+    contractor_applicable: true, contractor_name: 'Schlumberger Oilfield Services India Pvt Ltd', vendor_code: 'v-slb-01', contract_reference: 'CNT-SLB-2026-09',
+    scope_of_service: 'Drilling & Subsea Tubular Casing Supply', contact_person: 'Rajesh Sharma', contact_number: '+91-2982-250100',
+    delivery_address: 'RJ-ON-90/1 Mangala Central Processing Facility, Barmer, Rajasthan 344001', site_contact_person: 'Rohan Mehta (Procurement Lead)', site_contact_number: '+91-2982-250100', delivery_instructions: 'Handle with care. Offload at Yard 4.',
+    general_remarks: 'Required for Well Pad B1-B5 expansion', internal_notes: 'Urgent procurement', terms_and_conditions: 'Standard Vedanta Cairn Procurement Terms', department: 'Supply Chain & Drilling Logistics',
+    unlocked_project: 1.00, prepared_by: 'Vedanta Admin',
+    discount_amount: 0, freight_amount: 15000, other_charges: 5000, contingency_amount: 0,
+    lines: [
+      {
+        key: `prline-init-${Date.now()}`,
+        source_mr_id: null,
+        source_mr_line_id: null,
+        source_mr_number: null,
+        item_id: 'item-01',
+        item_code: 'OIL-PIPE-1338',
+        item_group: 'Piping & Casing',
+        item_description: '13-3/8 inch Subsea Casing Pipe API 5CT L80',
+        specification: 'Seamless Steel Casing Pipe 68 lb/ft Premium Thread',
+        preferred_brand: 'Vallourec / Jindal SAW',
+        unit: 'Mtr',
+        quantity: 100,
+        estimated_rate: 45000,
+        tax_rate: 18,
+        discount_pct: 0,
+        discount_amount: 0,
+        freight_charges: 15000,
+        loading_unloading_charges: 5000,
+        other_charges: 2000,
+        required_date: required,
+        delivery_location: 'RJ-ON-90/1 Mangala Central Processing Facility, Barmer',
+        activity_name: 'Drilling & Well Construction',
+        sub_activity_name: 'Intermediate Casing String Installation',
+        wbs_code: 'WBS-WELL-001',
+        remarks: 'Pre-filled line item for oilfield E&P drilling',
+      },
+    ],
   };
 }
 

@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
   let title = 'Purchase Requisition';
   let docNumber = 'PR-2026-001';
   let date = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-  let projectName = 'Pramukh Heights';
+  let projectName = 'RJ-ON-90/1 Mangala Field';
   let lines: Array<{ item: string; qty: number; rate: number }> = [];
   let totalCost = 0;
   let status = 'Approved';
@@ -77,9 +77,9 @@ export async function GET(req: NextRequest) {
 
   if (lines.length === 0) {
     lines = [
-      { item: 'CPVC Pipes & Fittings 2"', qty: 150, rate: 450 },
-      { item: 'Brass Ball Valves 1"', qty: 40, rate: 850 },
-      { item: 'Solvent Cement 500ml', qty: 15, rate: 320 },
+      { item: '13-3/8 inch Subsea Casing Pipe API 5CT L80', qty: 100, rate: 45000 },
+      { item: 'Subsea Wellhead Assemblies 15000 PSI', qty: 2, rate: 1250000 },
+      { item: 'Duplex Stainless Steel Flowlines 8 inch', qty: 50, rate: 85000 },
     ];
     totalCost = lines.reduce((a, b) => a + b.qty * b.rate, 0);
   }
@@ -124,7 +124,7 @@ export async function GET(req: NextRequest) {
   <div class="container">
     <div class="header">
       <div>
-        <div class="company-title">PRAMUKH REALTY & BUILDERS</div>
+        <div class="company-title">VEDANTA OIL &amp; GAS (CAIRN)</div>
         <div class="company-subtitle">Field Operations & ERP System</div>
       </div>
       <div class="doc-badge">${type === 'PR' ? 'Purchase Requisition' : 'Purchase Order'}</div>

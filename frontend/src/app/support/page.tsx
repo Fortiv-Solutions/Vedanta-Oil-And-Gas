@@ -90,7 +90,7 @@ export default function SupportPage() {
       description: 'Verified structural measurement quantity match with BOQ item code BOQ-CONC-04.',
       status: 'RESOLVED',
       createdAt: '2026-08-07 10:15',
-      assignedEngineer: 'Pramukh Finance Tech Desk',
+      assignedEngineer: 'Vedanta Finance Tech Desk',
       attachments: []
     }
   ]);
@@ -99,7 +99,7 @@ export default function SupportPage() {
   const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>([
     {
       question: 'How do Site Engineers sync offline logs from the site mobile app?',
-      answer: 'The Pramukh Site App automatically caches log entries, measurement readings, and photo uploads offline when cellular connectivity is weak. Once internet connection is restored, click the "Sync" button at the top of the mobile home screen to push all cached logs to the central ERP.'
+      answer: 'The Vedanta Site App automatically caches log entries, measurement readings, and photo uploads offline when cellular connectivity is weak. Once internet connection is restored, click the "Sync" button at the top of the mobile home screen to push all cached logs to the central ERP.'
     },
     {
       question: 'How does AI compilation generate the Daily Progress Report (DPR)?',
@@ -155,7 +155,7 @@ export default function SupportPage() {
         description: t.description,
         status: t.status,
         createdAt: t.created_at ? new Date(t.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Just now',
-        assignedEngineer: t.assigned_engineer_name || 'Pramukh Support Desk',
+        assignedEngineer: t.assigned_engineer_name || 'Vedanta Support Desk',
         attachments: t.attachments || []
       }));
       setTickets(mapped);
@@ -211,7 +211,7 @@ export default function SupportPage() {
         description: createdRow.description,
         status: createdRow.status,
         createdAt: createdRow.created_at ? new Date(createdRow.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'Just now',
-        assignedEngineer: createdRow.assigned_engineer_name || 'Pramukh Support Desk',
+        assignedEngineer: createdRow.assigned_engineer_name || 'Vedanta Support Desk',
         attachments: attachedImages
       };
 
@@ -271,7 +271,7 @@ export default function SupportPage() {
               </span>
             </div>
             <h1 className="font-heading text-2xl lg:text-3xl font-extrabold tracking-tight text-white">
-              Pramukh Help & Support Portal
+              Vedanta Help & Support Portal
             </h1>
             <p className="text-xs lg:text-sm text-gray-400 max-w-2xl leading-relaxed">
               Instant technical assistance, image proof attachments, mobile site engineer sync support, and database-backed ticketing system.
@@ -316,7 +316,7 @@ export default function SupportPage() {
 
         {/* Email Support */}
         <a
-          href="mailto:support@pramukhgroup.com"
+          href="mailto:procurement@vedantaoilandgas.com"
           className="group p-5 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-xs hover:border-[#e83e8c]/40 transition-all flex items-start gap-4"
         >
           <div className="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
@@ -324,7 +324,7 @@ export default function SupportPage() {
           </div>
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Email Desk</span>
-            <h3 className="font-bold text-foreground text-xs mt-0.5 truncate max-w-[150px] group-hover:text-blue-600 transition-colors">support@pramukhgroup.com</h3>
+            <h3 className="font-bold text-foreground text-xs mt-0.5 truncate max-w-[150px] group-hover:text-blue-600 transition-colors">procurement@vedantaoilandgas.com</h3>
             <p className="text-[11px] text-muted-foreground mt-1">Response time: under 30 minutes</p>
           </div>
         </a>
@@ -372,7 +372,7 @@ export default function SupportPage() {
                 <Send className="w-5 h-5 text-[#e83e8c]" /> Raise a Support Ticket
               </h2>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Submit an issue or technical ticket directly to Pramukh Group Operations Engineers.
+                Submit an issue or technical ticket directly to Vedanta Group Operations Engineers.
               </p>
             </div>
             <span className="text-[11px] font-bold bg-[#e83e8c]/10 text-[#e83e8c] px-3 py-1 rounded-full border border-[#e83e8c]/20">
@@ -623,7 +623,7 @@ export default function SupportPage() {
               <Sparkles className="w-5 h-5 text-[#e83e8c]" /> Knowledge Base & FAQs
             </h2>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Frequently asked questions and step-by-step guides for Pramukh Group ERP modules.
+              Frequently asked questions and step-by-step guides for Vedanta Group ERP modules.
             </p>
           </div>
 

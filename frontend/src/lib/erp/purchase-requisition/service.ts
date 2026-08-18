@@ -452,7 +452,62 @@ export async function savePurchaseRequisition(
 
     if (!isLiveSupabase()) {
       const prId = form.id || `pr-local-${Date.now()}`;
-      const prNumber = form.pr_number || `PR-${Date.now().toString().slice(-4)}`;
+      const prNumber = form.pr_number || `PR-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.floor(100 + Math.random() * 900)}`;
+      const summary = computeCostSummary(form);
+      const newPrRow: PurchaseRequisitionRow = {
+        id: prId,
+        pr_number: prNumber,
+        company_name: form.company_name || 'Vedanta Oil & Gas (Cairn)',
+        project_id: form.project_id || 'f6704467-df8c-4f51-a49b-ddfdc40c39af',
+        site_id: form.site_id || null,
+        pr_type: form.pr_type || 'material',
+        priority: form.priority || 'high',
+        status: nextStatus as any,
+        required_date: form.required_date || new Date().toISOString().slice(0, 10),
+        budget_applicable: form.budget_applicable ?? true,
+        total_amount: summary.totalEstimatedCost || 4500000,
+        prepared_by: form.prepared_by || 'Vedanta Admin',
+        created_at: new Date().toISOString(),
+        department: form.department || 'Supply Chain & Operations',
+        delivery_address: form.delivery_address || 'RJ-ON-90/1 Mangala Central Processing Facility, Barmer, Rajasthan 344001',
+        purchase_requisition_lines: (form.lines.length > 0 ? form.lines : [
+          {
+            key: 'init-1',
+            item_description: '13-3/8 inch Subsea Casing Pipe API 5CT L80',
+            quantity: 100,
+            estimated_rate: 45000,
+            unit: 'Mtr',
+            item_code: 'OIL-PIPE-1338',
+            item_group: 'Piping & Casing',
+            preferred_brand: 'Vallourec',
+            specification: 'Seamless Steel Casing Pipe 68 lb/ft',
+            activity_name: 'Drilling & Well Construction',
+            sub_activity_name: 'Intermediate Casing String Installation',
+          } as any
+        ]).map((l, idx) => ({
+          id: `prl-${prId}-${idx}`,
+          line_number: idx + 1,
+          item_description: l.item_description || '13-3/8 inch Subsea Casing Pipe API 5CT L80',
+          quantity: l.quantity || 10,
+          estimated_rate: l.estimated_rate || 45000,
+          unit: l.unit || 'Mtr',
+          item_code: l.item_code || 'OIL-PIPE-1338',
+          item_group: l.item_group || 'Piping & Casing',
+          preferred_brand: l.preferred_brand || 'Vallourec',
+          specification: l.specification || 'Seamless Steel Casing Pipe 68 lb/ft',
+          activity_name: l.activity_name || 'Drilling & Well Construction',
+          sub_activity_name: l.sub_activity_name || 'Intermediate Casing String Installation',
+        })),
+        profiles: { name: 'Vedanta Admin', email: 'procurement@vedantaoilandgas.com' },
+      };
+
+      const existingIdx = mockPurchaseRequisitionsStore.findIndex((p) => p.id === prId || p.pr_number === prNumber);
+      if (existingIdx >= 0) {
+        mockPurchaseRequisitionsStore[existingIdx] = newPrRow;
+      } else {
+        mockPurchaseRequisitionsStore.unshift(newPrRow);
+      }
+
       return { data: { purchaseRequisitionId: prId, prNumber, status: nextStatus }, error: null };
     }
     const profileId = await currentProfileId();
